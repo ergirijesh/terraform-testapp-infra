@@ -1,15 +1,20 @@
-name: Terraform Azure CLI Auth Pipeline
+name: Terraform - Azure CLI Auth for Dev Environment
 
 on:
   push:
     branches:
       - main
       - 'feature/**'
+    paths:
+      - 'environments/dev/**'
 
 jobs:
   terraform:
-    name: Terraform on Azure with az login
+    name: Terraform Dev Deploy
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: environments/dev
 
     steps:
       - name: Checkout code
@@ -18,7 +23,7 @@ jobs:
       - name: Azure Login via GitHub Action (az CLI)
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}  # OIDC or service principal creds
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
