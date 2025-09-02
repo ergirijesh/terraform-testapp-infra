@@ -6,7 +6,7 @@ on:
       - main
       - 'feature/**'
     paths:
-      - 'environments/dev/**'
+      - 'environments/dev'
 
 jobs:
   terraform:
