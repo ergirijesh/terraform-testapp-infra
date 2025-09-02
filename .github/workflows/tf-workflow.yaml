@@ -1,4 +1,4 @@
-name: Terraform - Azure CLI Auth for Dev Environment
+name: Terraform - Azure  Dev Environment
 
 on:
   push:
