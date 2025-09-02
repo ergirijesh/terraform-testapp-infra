@@ -1,12 +1,11 @@
-name: Terraform - Azure  Dev Environment
+name: Terraform - Azure Dev Environment
 
 on:
   push:
     branches:
       - main
       - 'feature/**'
-    paths:
-      - 'environments/dev/**'
+  workflow_dispatch:  # manual trigger support
 
 jobs:
   terraform:
@@ -35,12 +34,12 @@ jobs:
         run: terraform validate
         working-directory: environments/dev
 
-      - name: Terraform Plan
+      - name: Terraform Plan (for feature branches)
         if: startsWith(github.ref, 'refs/heads/feature/')
         run: terraform plan
         working-directory: environments/dev
 
-      - name: Terraform Apply
+      - name: Terraform Apply (for main branch)
         if: github.ref == 'refs/heads/main'
         run: terraform apply -auto-approve
         working-directory: environments/dev
