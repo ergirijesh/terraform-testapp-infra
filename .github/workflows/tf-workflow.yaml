@@ -1,0 +1,40 @@
+name: Terraform Azure CLI Auth Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - 'feature/**'
+
+jobs:
+  terraform:
+    name: Terraform on Azure with az login
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Azure Login via GitHub Action (az CLI)
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}  # OIDC or service principal creds
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.6.0
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Validate
+        run: terraform validate
+
+      - name: Terraform Plan
+        if: startsWith(github.ref, 'refs/heads/feature/')
+        run: terraform plan
+
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main'
+        run: terraform apply -auto-approve
