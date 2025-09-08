@@ -1,0 +1,9 @@
+name: "Infra Workflow"
+on: 
+  push: 
+    branches:
+    - 'features/**'
+    - 'main'
+    - 'hotfix/**'
+    
+    
