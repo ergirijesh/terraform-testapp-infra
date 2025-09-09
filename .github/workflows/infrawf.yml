@@ -5,5 +5,13 @@ on:
     - 'features/**'
     - 'main'
     - 'hotfix/**'
+
+jobs:
+ workflowjob1: 
+   name: Workflow Job1
+   runs_on: self-hosted
+   steps:
+   - name: Workflow Task1
+     run: echo "Hello world! This is my first workflow"
     
     
