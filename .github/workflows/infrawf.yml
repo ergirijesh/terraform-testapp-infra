@@ -1,18 +1,13 @@
-name: "Infra Workflow"
+name: "Infra Workflow Terraform"
 
-on: 
-  push: 
-    branches:
-    - 'features/**'
-    - 'main'
-    - 'hotfix/**'
+on: workflow_dispatch
 
 jobs:
-  workflow-job1: 
-   name: Workflow Job1
+  terraform-job: 
    runs-on: self-hosted
    steps:
-   - name: Workflow Task1
-     run: echo "Hello world! This is my first workflow"
+    - name: Checkout
+      uses: actions/checkout@v5.0.0
+
     
     
