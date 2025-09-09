@@ -1,4 +1,5 @@
 name: "Infra Workflow"
+
 on: 
   push: 
     branches:
@@ -7,9 +8,9 @@ on:
     - 'hotfix/**'
 
 jobs:
- workflowjob1: 
+  workflow-job1: 
    name: Workflow Job1
-   runs_on: self-hosted
+   runs-on: self-hosted
    steps:
    - name: Workflow Task1
      run: echo "Hello world! This is my first workflow"
