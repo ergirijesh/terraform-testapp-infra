@@ -6,13 +6,13 @@ terraform {
     }
   }
 
-  #   backend "azurerm" {
-  #     resource_group_name = "giri-rg-st_acc"
-  #     storage_account_name = "giristacc1"
-  #     container_name = "giri-st-cont"
-  #     key = "dev.terraform.tfstate"
+    backend "azurerm" {
+      resource_group_name = "giri-rg-st_acc"
+      storage_account_name = "giristacc1"
+      container_name = "giri-st-cont"
+      key = "dev.terraform.tfstate"
 
-  #   }
+    }
 }
 
 provider "azurerm" {
