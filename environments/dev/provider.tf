@@ -3,18 +3,19 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "4.42.0"
+      version = "4.22.0"
     }
   }
+
   backend "azurerm" {
-    resource_group_name  = "giri-rg-st_acc"
-    storage_account_name = "giristacc1"
-    container_name       = "giri-st-cont"
-    key                  = "dev.terraform.tfstate"
+    resource_group_name  = "giri-st-acc-rg"  
+    storage_account_name = "giristorage1"                     
+    container_name       = "gcontainer"                       
+    key                  = "dev.tfstate"
+
+    # 👇 Add these 2 lines
+    use_azuread_auth     = true
+    subscription_id      = "95bc943b-79d8-4936-9c7b-cb9a2334d711"
   }
 }
 
-provider "azurerm" {
-  features {}
-  subscription_id = "95bc943b-79d8-4936-9c7b-cb9a2334d711"
-}
