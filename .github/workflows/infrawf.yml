@@ -7,7 +7,8 @@ permissions:
   contents: read
 
 jobs:
-  terraform-job: 
+  terraform-job:
+   environment: dev
    runs-on: self-hosted
    
    steps:
