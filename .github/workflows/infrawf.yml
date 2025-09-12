@@ -7,8 +7,7 @@ permissions:
   contents: read
 
 jobs:
-  terraform-job:
-   environment: dev
+  terraform-init-plan:
    runs-on: self-hosted
    
    steps:
@@ -45,6 +44,26 @@ jobs:
       continue-on-error: true    
       working-directory: environments/dev
 
+  terraform-apply:
+   environment: dev
+   needs: terraform-init-plan
+   runs-on: self-hosted
+   steps:
+    - name: Checkout
+      uses: actions/checkout@v5.0.0
+      
+    - name: Azure Login
+      uses: Azure/login@v2.3.0
+      with:
+        client-id: d842bbf1-218f-459e-8672-748ef5d4051b
+        tenant-id: 4d3c35fd-579b-46f5-b304-c4484166d750
+        subscription-id: 95bc943b-79d8-4936-9c7b-cb9a2334d711
+        
+    - name: Terraform apply
+      id: apply
+      run: terraform apply --auto-approve
+      continue-on-error: true    
+      working-directory: environments/dev   
 
           
     
